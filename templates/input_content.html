@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Input Content</title>
+</head>
+<body>
+    <h1>Round {{ round_num }}</h1>
+    <h2>Card number: {{ card_number }}</h2>
+    <p><b>Prompt:</b> {{ prompt }}</p>
+    <form action="submit_content" method="post">
+        {% if input_types == None or input_types == [] %}
+            <p>There has been an error. Please <a href="index.html">restart the game</a>.</p>
+        {% else %}
+            {% if "text" in input_types %}
+                <label for="text-input">Text</label>
+                <input type="text" name="text-input"/>
+            {% endif %}
+            {% if "image" in input_types %}
+                <label for="image-input">Image</label>
+                <input type="image" name="image-input"/>
+            {% endif %}
+            {% if "color" in input_types %}
+                <label for="color-input">Color</label>
+                <input type="color" name="color-input"/>
+            {% endif %}
+            {% if "url" in input_types %}
+                <label for="url-input">URL</label>
+                <input type="url" name="url-input"/>
+            {% endif %}
+            {% if "password" in input_types %}
+                <label for="password-input">Password</label>
+                <input type="password" name="password-input"/>
+            {% endif %}
+            {% if "email" in input_types %}
+                <label for="email-input">Email</label>
+                <input type="email" name="email-input"/>
+            {% endif %}
+            {% if "telephone" in input_types %}
+                <label for="telephone-input">Telephone</label>
+                <input type="tel" name="telephone-input"/>
+            {% endif %}
+            {% if "time" in input_types %}
+                <label for="time-input">Time</label>
+                <input type="time" name="time-input"/>
+            {% endif %}
+            {% if "textarea" in input_types %}
+                <label for="textarea-input">Text area</label>
+                <br>
+                <textarea name="textarea-input"></textarea>
+            {% endif %}
+            {% if "date" in input_types %}
+                <label for="date-input">Date</label>
+                <input type="date" name="date-input"/>
+            {% endif %}
+            {% if "number" in input_types %}
+                <label for="number-input">Number</label>
+                <input type="number" name="number-input"/>
+            {% endif %}
+            {% if "radio" in input_types %}
+                {% for option in options %}
+                    <input type="radio" id="{{ option }}" name="radio_input" value="{{ option }}">
+                    <label for="{{ option }}">{{ option }}</label>
+                {% endfor %}
+            {% endif %}
+            {% if "checkbox" in input_types %}
+                {% for option in options %}
+                    <input type="checkbox" id="{{ option }}" name="checkbox_input" value="{{ option }}">
+                    <label for="{{ option }}">{{ option }}</label>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

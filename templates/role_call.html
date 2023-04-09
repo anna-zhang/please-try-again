@@ -8,6 +8,13 @@
 <body>
     <h1>Round {{ round_num }}</h1>
     <h2>{{ curr_player_name }}, you're up!</h2>
-    <button>I'm Ready!</button>
+    <!-- Depending on if the content moderator or provider is called up, the "I'm Ready" button goes to the corresponding page -->
+    {% if curr_role == 'provider' %}
+        <a href="/input_content">I'm Ready!</a>
+    {% elif curr_role == 'moderator' %}
+        <a href="/review_content">I'm Ready!</a>
+    {% else %}
+        <p>There has been an error. Please <a href="index.html">restart the game</a>.</p>
+    {% endif %}
 </body>
 </html>

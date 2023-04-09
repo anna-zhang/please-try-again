@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from flask import Flask, request, make_response, render_template, session, redirect, url_for
+from cards_list import Card, cards
 
 #-----------------------------------------------------------------------
 
@@ -76,3 +77,19 @@ def role_call():
         return render_template('error.html')
 
     return render_template('role_call.html', curr_role=curr_role, curr_player_name=curr_player_name, round_num=round_num)
+
+
+@app.route('/input_content', methods=['GET'])
+def input_content():
+    # card_number = session['card_number'] # get the card number for the round
+    # TEST
+    card_number = 27 # get the card number for the round
+    curr_card = cards[card_number] # get current Card, which holds all info (prompt, rule, input types, options)
+    print(curr_card)
+    prompt = curr_card.prompt # String with prompt
+    input_types = curr_card.input_types # list of input types
+    options = curr_card.options # list of options, applicable only if checkbox or radio input types, None otherwise
+    round_num = session['round_number'] # which round the players are on
+    html = render_template('input_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options)
+    response = make_response(html)
+    return response
