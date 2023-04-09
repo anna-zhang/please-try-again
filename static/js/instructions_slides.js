@@ -38,8 +38,8 @@ function nextSlide () {
   let nextSlideNum = parseInt(nextButton.getAttribute('value'))
 
   if (nextSlideNum == instructions.length) {
-    // If on last intro slide, clicking the next arrow starts the game
-    location.href = '/play'
+    // If on last intro slide, clicking the next arrow starts the game by going to the set up game page
+    location.href = '/setup'
     return
   }
 
