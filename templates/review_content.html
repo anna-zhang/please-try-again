@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Input Content</title>
+</head>
+<body>
+    <h1>Round {{ round_num }}</h1>
+    <h2>Card number: {{ card_number }}</h2>
+    <p><b>Prompt:</b> {{ prompt }}</p>
+    <form method="post">
+        {% if input_types == None or input_types == [] %}
+            <p>There has been an error. Please <a href="index.html">restart the game</a>.</p>
+        {% else %}
+            <p>Show submitted content here</p>
+        {% endif %}
+        <button type="submit" formaction="/accept_content">Accept</button>
+        <button type="submit" formaction="/reject_content">Reject</button>
+    </form>
+</body>
+</html>

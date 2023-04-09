@@ -2,11 +2,19 @@
 
 from flask import Flask, request, make_response, render_template, session, redirect, url_for
 from cards_list import Card, cards
+import os
+from werkzeug.utils import secure_filename
+
+
+#-----------------------------------------------------------------------
+
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 
 #-----------------------------------------------------------------------
 
 app = Flask(__name__) # set up Flask server
 app.secret_key = "a secret key for testing" # need to set a secret key in order to use session cookies
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER # configure the file upload folder
 
 #-----------------------------------------------------------------------
 
@@ -78,12 +86,12 @@ def role_call():
 
     return render_template('role_call.html', curr_role=curr_role, curr_player_name=curr_player_name, round_num=round_num)
 
-
+# Content submission page
 @app.route('/input_content', methods=['GET'])
 def input_content():
-    # card_number = session['card_number'] # get the card number for the round
+    card_number = session['card_number'] # get the card number for the round
     # TEST
-    card_number = 27 # get the card number for the round
+    # card_number = 27 # get the card number for the round
     curr_card = cards[card_number] # get current Card, which holds all info (prompt, rule, input types, options)
     print(curr_card)
     prompt = curr_card.prompt # String with prompt
@@ -93,3 +101,58 @@ def input_content():
     html = render_template('input_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options)
     response = make_response(html)
     return response
+
+# Process submitted content from content submission page
+@app.route('/submit_content', methods=['POST'])
+def submit_content():
+    card_number = session['card_number'] # get the card number for the round
+    curr_card = cards[card_number] # get current Card, which holds all info (prompt, rule, input types, options)
+    print(curr_card)
+    input_types = curr_card.input_types # list of input types
+
+    session["submitted_content"] = {} # clear previous cookie
+
+    for input in input_types:
+        if input == "image":
+            img = request.files.get('image-input', '')
+            # get filename of the uploaded image
+            img_filename = secure_filename(img.filename)
+            # save the file locally
+            img.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
+            # remember the uploaded image
+            session["submitted_content"]["image"] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
+            # session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
+        else:
+            input_field = input + "-input"
+            session["submitted_content"][input] = request.form.get(input_field)
+        print("SUBMITTED CONTENT: " + str(session["submitted_content"])) # FOR DEBUGGING
+    
+    # Switch roles
+    session['turn'] = 'moderator'
+    return redirect(url_for('role_call'))
+
+# Get rule card instruction
+@app.route('/rule_card', methods=['GET'])
+def rule_card():
+    card_number = session['card_number'] # get the card number for the round
+    round_num = session['round_number'] # which round the players are on
+    html = render_template('rule_card.html', card_number=card_number, round_num=round_num)
+    response = make_response(html)
+    return response
+
+
+@app.route('/review_content', methods=['GET'])
+def review_content():
+    card_number = session['card_number'] # get the card number for the round
+    curr_card = cards[card_number] # get current Card, which holds all info (prompt, rule, input types, options)
+    print(curr_card)
+
+    prompt = curr_card.prompt # String with prompt
+    input_types = curr_card.input_types # list of input types
+    options = curr_card.options # list of options, applicable only if checkbox or radio input types, None otherwise
+    
+    round_num = session['round_number'] # which round the players are on
+    html = render_template('review_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options)
+    response = make_response(html)
+    return response
+    
