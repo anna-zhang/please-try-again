@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 
 #-----------------------------------------------------------------------
 
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads') # TODO: if 'uploads' folder doesn't exist, create it
 
 #-----------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ def setup_game():
     session['provider'] = 'player2'
     session['turn'] = 'provider' # set which role is starting
     session['round_number'] = 1 # set which round number the pair of players is on
-    session['card_number'] = 1 # set the card number for the round
+    session['card_number'] = 5 # set the card number for the round; TODO: change this for testing
     return response
 
 # Play Game
@@ -114,7 +114,7 @@ def submit_content():
 
     for input in input_types:
         if input == "image":
-            img = request.files.get('image-input', '')
+            img = request.files['image-input']
             # get filename of the uploaded image
             img_filename = secure_filename(img.filename)
             # save the file locally
