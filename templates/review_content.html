@@ -55,7 +55,7 @@
                 {% endfor %}
             {% endif %}
             {% if "checkbox" in input_types %}
-                {% for i in options|length %}
+                {% for i in range(options|length) %}
                     <p>{{ submitted_content['checkbox'][i] }}</p>
                 {% endfor %}
             {% endif %}

@@ -4,6 +4,7 @@ from flask import Flask, request, make_response, render_template, session, redir
 from cards_list import Card, cards
 import os
 from werkzeug.utils import secure_filename
+import random
 
 
 #-----------------------------------------------------------------------
@@ -29,7 +30,7 @@ def index():
     session['moderator'] = None # which player is in this role right now, either 'player1' or 'player2'
     session['provider'] = None # which player is in this role right now, either 'player1' or 'player2'
     session['round_number'] = 0 # remember which round the pair of players is currently on
-    session['card_number'] = 0 # remember which card the pair of players is currently on
+    session['card_index'] = 0 # remember which card the pair of players is currently on
     session['turn'] = None # remember which role is currently up, either 'provider' or 'moderator'
     return response
 
@@ -62,7 +63,8 @@ def setup_game():
     session['provider'] = 'player2'
     session['turn'] = 'provider' # set which role is starting
     session['round_number'] = 1 # set which round number the pair of players is on
-    session['card_number'] = 14 # set the card number for the round; TODO: change this for testing
+    # session['card_index'] = random.randrange(0, len(cards)) # set the card number for the round; TODO: change this for testing
+    session['card_index'] = 26 # set the card number for the round; TODO: change this for testing
     session['attempt_number'] = 1 # set which attempt number the provider is on for this card
     return response
 
@@ -91,10 +93,9 @@ def role_call():
 # Content submission page
 @app.route('/input_content', methods=['GET'])
 def input_content():
-    card_number = session['card_number'] # get the card number for the round
-    # TEST
-    # card_number = 27 # get the card number for the round
-    curr_card = cards[card_number] # get current Card, which holds all info (prompt, rule, input types, options)
+    card_index = session['card_index'] # get the index of the card in the cards list for the round
+    curr_card = cards[card_index] # get current Card, which holds all info (prompt, rule, input types, options)
+    card_number = curr_card.id # get unique identifier of card
     print(curr_card)
     prompt = curr_card.prompt # String with prompt
     input_types = curr_card.input_types # list of input types
@@ -108,8 +109,9 @@ def input_content():
 # Process submitted content from content submission page
 @app.route('/submit_content', methods=['POST'])
 def submit_content():
-    card_number = session['card_number'] # get the card number for the round
-    curr_card = cards[card_number] # get current Card, which holds all info (prompt, rule, input types, options)
+    card_index = session['card_index'] # get the index of the card in the cards list for the round
+    curr_card = cards[card_index] # get current Card, which holds all info (prompt, rule, input types, options)
+    card_number = curr_card.id # get unique identifier of card
     print(curr_card)
     input_types = curr_card.input_types # list of input types
 
@@ -137,7 +139,9 @@ def submit_content():
 # Get rule card instruction
 @app.route('/rule_card', methods=['GET'])
 def rule_card():
-    card_number = session['card_number'] # get the card number for the round
+    card_index = session['card_index'] # get the index of the card in the cards list for the round
+    curr_card = cards[card_index] # get current Card, which holds all info (prompt, rule, input types, options)
+    card_number = curr_card.id # get unique identifier of card
     round_num = session['round_number'] # which round the players are on
     attempt_num = session['attempt_number'] # get current attempt number
     html = render_template('rule_card.html', card_number=card_number, round_num=round_num, attempt_num=attempt_num)
@@ -147,8 +151,9 @@ def rule_card():
 
 @app.route('/review_content', methods=['GET'])
 def review_content():
-    card_number = session['card_number'] # get the card number for the round
-    curr_card = cards[card_number] # get current Card, which holds all info (prompt, rule, input types, options)
+    card_index = session['card_index'] # get the index of the card in the cards list for the round
+    curr_card = cards[card_index] # get current Card, which holds all info (prompt, rule, input types, options)
+    card_number = curr_card.id # get unique identifier of card
     print(curr_card)
 
     prompt = curr_card.prompt # String with prompt
@@ -196,5 +201,22 @@ def exit_game():
     html = render_template('exit_game.html')
     response = make_response(html)
     return response
+
+# Give option to skip this round or exit game entirely 
+@app.route('/next_round', methods=['GET'])
+def next_round():
+    # Change roles
+    session['moderator'] = session['provider']
+    if session['moderator'] == 'player2':
+        session['provider'] = 'player1'
+    else:
+        session['provider'] = 'player2'
+    session['turn'] = 'provider' # back to provider starting
+    session['round_number'] = session['round_number'] + 1 # increment round number
+    session['card_index'] = random.randrange(0, len(cards))
+    session['attempt_number'] = 1 # set which attempt number the provider is on for this card
+    response = redirect(url_for('role_call'))
+    return response
+    
     
     

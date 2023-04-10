@@ -1,5 +1,5 @@
 class Card:
-  def __init__(self, index, prompt, rule, input_types, options = None):
+  def __init__(self, id, prompt, rule, input_types, options = None):
     self.id = id # Int: unique identifier for each card
     self.prompt = prompt # String: prompt for content provider
     self.rule = rule # String: rule for moderator
