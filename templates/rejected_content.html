@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rejected Content</title>
+</head>
+<body>
+    <h1>Round {{ round_num }}</h1>
+    <p>Attempt #{{ attempt_num }}</p>
+    <p>The content was rejected!</p>
+    <p>{{ curr_player_name }}, would you like to try again?</p>
+    <button onclick="window.location.href='/try_again'">Yes</button>
+    <button onclick="window.location.href='/exit_game'">No</button>
+</body>
+</html>

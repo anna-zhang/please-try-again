@@ -7,63 +7,62 @@
 </head>
 <body>
     <h1>Round {{ round_num }}</h1>
+    <p>Attempt #{{ attempt_num }}</p>
     <h2>Card number: {{ card_number }}</h2>
     <p><b>Prompt:</b> {{ prompt }}</p>
-    <form method="post">
+    {% if input_types == None or input_types == [] %}
+        <p>There has been an error. Please <a href="index.html">restart the game</a>.</p>
+    {% else %}
         {% if input_types == None or input_types == [] %}
             <p>There has been an error. Please <a href="index.html">restart the game</a>.</p>
         {% else %}
-            {% if input_types == None or input_types == [] %}
-                <p>There has been an error. Please <a href="index.html">restart the game</a>.</p>
-            {% else %}
-                {% if "text" in input_types %}
+            {% if "text" in input_types %}
+                <p>{{ submitted_content['text'] }}</p>
+            {% endif %}
+            {% if "image" in input_types %}
+                <img src="{{ submitted_content['image'] }}" width="500px" />
+            {% endif %}
+            {% if "color" in input_types %}
+                <div style="width: 500px; height: 300px;">{{ submitted_content['color'] }}</div>
+            {% endif %}
+            {% if "url" in input_types %}
+                <a href="{{ submitted_content['url'] }}">{{ submitted_content['url']}}</a>
+            {% endif %}
+            {% if "password" in input_types %}
+                <p>{{ submitted_content['password'] }}</p>
+            {% endif %}
+            {% if "email" in input_types %}
+                <p>{{ submitted_content['email'] }}</p>
+            {% endif %}
+            {% if "telephone" in input_types %}
+                <p>{{ submitted_content['telephone'] }}</p>
+            {% endif %}
+            {% if "time" in input_types %}
+                <p>{{ submitted_content['time'] }}</p>
+            {% endif %}
+            {% if "textarea" in input_types %}
+                <p>{{ submitted_content['textarea'] }}</p>
+            {% endif %}
+            {% if "date" in input_types %}
+                <p>{{ submitted_content['date'] }}</p>
+            {% endif %}
+            {% if "number" in input_types %}
+                <p>{{ submitted_content['number'] }}</p>
+            {% endif %}
+            {% if "radio" in input_types %}
+                {% for option in options %}
                     <p>{{ submitted_content['text'] }}</p>
-                {% endif %}
-                {% if "image" in input_types %}
-                    <img src="{{ submitted_content['image'] }}" width="500px" />
-                {% endif %}
-                {% if "color" in input_types %}
-                    <div style="width: 500px; height: 300px;">{{ submitted_content['color'] }}</div>
-                {% endif %}
-                {% if "url" in input_types %}
-                    <a href="{{ submitted_content['url'] }}">{{ submitted_content['url']}}</a>
-                {% endif %}
-                {% if "password" in input_types %}
-                    <p>{{ submitted_content['password'] }}</p>
-                {% endif %}
-                {% if "email" in input_types %}
-                    <p>{{ submitted_content['email'] }}</p>
-                {% endif %}
-                {% if "telephone" in input_types %}
-                    <p>{{ submitted_content['telephone'] }}</p>
-                {% endif %}
-                {% if "time" in input_types %}
-                    <p>{{ submitted_content['time'] }}</p>
-                {% endif %}
-                {% if "textarea" in input_types %}
-                    <p>{{ submitted_content['textarea'] }}</p>
-                {% endif %}
-                {% if "date" in input_types %}
-                    <p>{{ submitted_content['date'] }}</p>
-                {% endif %}
-                {% if "number" in input_types %}
-                    <p>{{ submitted_content['number'] }}</p>
-                {% endif %}
-                {% if "radio" in input_types %}
-                    {% for option in options %}
-                        <p>{{ submitted_content['text'] }}</p>
-                    {% endfor %}
-                {% endif %}
-                {% if "checkbox" in input_types %}
-                    {% for i in options|length %}
-                        <p>{{ submitted_content['checkbox'][i] }}</p>
-                    {% endfor %}
-                {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if "checkbox" in input_types %}
+                {% for i in options|length %}
+                    <p>{{ submitted_content['checkbox'][i] }}</p>
+                {% endfor %}
             {% endif %}
         {% endif %}
-        <br>
-        <button type="submit" formaction="/accept_content">Accept</button>
-        <button type="submit" formaction="/reject_content">Reject</button>
-    </form>
+    {% endif %}
+    <br>
+    <button onclick="window.location.href='/accept_content'">Accept</button>
+    <button onclick="window.location.href='/reject_content'">Reject</button>
 </body>
 </html>

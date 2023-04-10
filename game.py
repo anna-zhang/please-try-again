@@ -63,6 +63,7 @@ def setup_game():
     session['turn'] = 'provider' # set which role is starting
     session['round_number'] = 1 # set which round number the pair of players is on
     session['card_number'] = 14 # set the card number for the round; TODO: change this for testing
+    session['attempt_number'] = 1 # set which attempt number the provider is on for this card
     return response
 
 # Play Game
@@ -77,6 +78,7 @@ def play():
 @app.route('/role_call', methods=['GET'])
 def role_call():
     round_num = session['round_number'] # which round the players are on
+    attempt_num = session['attempt_number'] # get current attempt number
     curr_role = session['turn'] # 'moderator' or 'provider'
     curr_player_num = session[curr_role] # 'player1' or 'player2'
     curr_player_name = session[curr_player_num] # player 1's name or player 2's name
@@ -84,7 +86,7 @@ def role_call():
     if not curr_player_name:
         return render_template('error.html')
 
-    return render_template('role_call.html', curr_role=curr_role, curr_player_name=curr_player_name, round_num=round_num)
+    return render_template('role_call.html', curr_role=curr_role, curr_player_name=curr_player_name, round_num=round_num, attempt_num=attempt_num)
 
 # Content submission page
 @app.route('/input_content', methods=['GET'])
@@ -98,7 +100,8 @@ def input_content():
     input_types = curr_card.input_types # list of input types
     options = curr_card.options # list of options, applicable only if checkbox or radio input types, None otherwise
     round_num = session['round_number'] # which round the players are on
-    html = render_template('input_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options)
+    attempt_num = session['attempt_number'] # get current attempt number
+    html = render_template('input_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options, attempt_num=attempt_num)
     response = make_response(html)
     return response
 
@@ -136,7 +139,8 @@ def submit_content():
 def rule_card():
     card_number = session['card_number'] # get the card number for the round
     round_num = session['round_number'] # which round the players are on
-    html = render_template('rule_card.html', card_number=card_number, round_num=round_num)
+    attempt_num = session['attempt_number'] # get current attempt number
+    html = render_template('rule_card.html', card_number=card_number, round_num=round_num, attempt_num=attempt_num)
     response = make_response(html)
     return response
 
@@ -153,7 +157,36 @@ def review_content():
     submitted_content = session["submitted_content"]
     
     round_num = session['round_number'] # which round the players are on
-    html = render_template('review_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options, submitted_content=submitted_content)
+    attempt_num = session['attempt_number'] # get current attempt number
+    html = render_template('review_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options, submitted_content=submitted_content, attempt_num=attempt_num)
     response = make_response(html)
+    return response
+
+@app.route('/accept_content', methods=['GET'])
+def accepted_content():
+    round_num = session['round_number'] # which round the players are on
+    attempt_num = session['attempt_number'] # get current attempt number
+    html = render_template('accepted_content.html', round_num=round_num, attempt_num=attempt_num)
+    response = make_response(html)
+    return response
+
+@app.route('/reject_content', methods=['GET'])
+def rejected_content():
+    session['turn'] = 'provider' # back to provider's turn
+    curr_role = session['turn'] # 'moderator' or 'provider'
+    curr_player_num = session[curr_role] # 'player1' or 'player2'
+    curr_player_name = session[curr_player_num] # player 1's name or player 2's name
+    round_num = session['round_number'] # which round the players are on
+    attempt_num = session['attempt_number'] # get current attempt number
+    html = render_template('rejected_content.html', round_num=round_num, curr_player_name=curr_player_name, attempt_num=attempt_num)
+    response = make_response(html)
+    return response
+
+# Redirect to the content input page to try again
+@app.route('/try_again', methods=['GET'])
+def try_again():
+    curr_attempt_num = session['attempt_number'] # get current attempt number
+    session['attempt_number'] = curr_attempt_num + 1
+    response = redirect(url_for('input_content'))
     return response
     
