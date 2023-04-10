@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 
 #-----------------------------------------------------------------------
 
-UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads') # TODO: if 'uploads' folder doesn't exist, create it
+UPLOAD_FOLDER = os.path.join('static', 'uploads') # static folder is the default Flask folder for static files
 
 #-----------------------------------------------------------------------
 
@@ -62,7 +62,7 @@ def setup_game():
     session['provider'] = 'player2'
     session['turn'] = 'provider' # set which role is starting
     session['round_number'] = 1 # set which round number the pair of players is on
-    session['card_number'] = 5 # set the card number for the round; TODO: change this for testing
+    session['card_number'] = 3 # set the card number for the round; TODO: change this for testing
     return response
 
 # Play Game
@@ -150,9 +150,10 @@ def review_content():
     prompt = curr_card.prompt # String with prompt
     input_types = curr_card.input_types # list of input types
     options = curr_card.options # list of options, applicable only if checkbox or radio input types, None otherwise
+    submitted_content = session["submitted_content"]
     
     round_num = session['round_number'] # which round the players are on
-    html = render_template('review_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options)
+    html = render_template('review_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options, submitted_content=submitted_content)
     response = make_response(html)
     return response
     
