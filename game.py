@@ -189,4 +189,12 @@ def try_again():
     session['attempt_number'] = curr_attempt_num + 1
     response = redirect(url_for('input_content'))
     return response
+
+# Give option to skip this round or exit game entirely 
+@app.route('/exit_game', methods=['GET'])
+def exit_game():
+    html = render_template('exit_game.html')
+    response = make_response(html)
+    return response
+    
     
