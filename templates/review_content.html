@@ -6,8 +6,7 @@
 <title>Input Content</title>
 </head>
 <body>
-    <h1>Round {{ round_num }}</h1>
-    <p>Attempt #{{ attempt_num }}</p>
+    {% include "_round_info.html" %}
     <h2>Card number: {{ card_number }}</h2>
     <p><b>Prompt:</b> {{ prompt }}</p>
     {% if input_types == None or input_types == [] %}

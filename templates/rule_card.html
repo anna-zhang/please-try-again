@@ -6,8 +6,7 @@
 <title>Rule Card</title>
 </head>
 <body>
-    <h1>Round {{ round_num }}</h1>
-    <p>Attempt #{{ attempt_num }}</p>
+    {% include "_round_info.html" %}
     <p>Find the card labeled <b>Rule #{{ card_number }}</b></p>
     <a href="/review_content">Found It</a>
 </body>
