@@ -20,7 +20,6 @@ cards = [
   Card(11, "Give a recipe with ingredients and steps.", "It must not have eggs or flour on the list of ingredients.", ["textarea"]), 
   Card(12, "Describe a recent trip you had. Where did you go? How did you get there?", "It must include a mode of transportation. It cannot include plane or car (flying, driving). Acceptable answers include walking/by foot, train, and bike.", ["textarea"]), 
   Card(13, "Where do you see yourself in the future?", "It must be an interior space.", ["image"]), 
-  Card(13, "Where do you see yourself in the future?", "It must be an interior space.", ["image"]), 
   Card(14, "Share a website that you love.", "It must be a URL that does not end with “.com”", ["url"]), 
   Card(15, "What is an event that you're looking forward to?", "The date must be six months from now.", ["text", "date"]), 
   Card(16, "What do you want to try?", "Can only select one of the options.", ["checkbox"], ["TODO: option1", "TODO: option2", "TODO: option3", "TODO: option4", "TODO: option5"]), 

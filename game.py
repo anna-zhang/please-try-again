@@ -62,7 +62,7 @@ def setup_game():
     session['provider'] = 'player2'
     session['turn'] = 'provider' # set which role is starting
     session['round_number'] = 1 # set which round number the pair of players is on
-    session['card_number'] = 3 # set the card number for the round; TODO: change this for testing
+    session['card_number'] = 14 # set the card number for the round; TODO: change this for testing
     return response
 
 # Play Game

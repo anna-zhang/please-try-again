@@ -16,52 +16,64 @@
             {% if "text" in input_types %}
                 <label for="text-input">Text</label>
                 <input type="text" name="text-input"/>
+                <br>
             {% endif %}
             {% if "image" in input_types %}
                 <label for="image-input">Image</label>
                 <input type="file" name="image-input"/>
+                <br>
             {% endif %}
             {% if "color" in input_types %}
                 <label for="color-input">Color</label>
                 <input type="color" name="color-input"/>
+                <br>
             {% endif %}
             {% if "url" in input_types %}
                 <label for="url-input">URL</label>
                 <input type="url" name="url-input"/>
+                <br>
             {% endif %}
             {% if "password" in input_types %}
                 <label for="password-input">Password</label>
                 <input type="password" name="password-input"/>
+                <br>
             {% endif %}
             {% if "email" in input_types %}
                 <label for="email-input">Email</label>
                 <input type="email" name="email-input"/>
+                <br>
             {% endif %}
             {% if "telephone" in input_types %}
                 <label for="telephone-input">Telephone</label>
                 <input type="tel" name="telephone-input"/>
+                <br>
             {% endif %}
             {% if "time" in input_types %}
                 <label for="time-input">Time</label>
                 <input type="time" name="time-input"/>
+                <br>
             {% endif %}
             {% if "textarea" in input_types %}
                 <label for="textarea-input">Text area</label>
                 <br>
                 <textarea name="textarea-input"></textarea>
+                <br>
             {% endif %}
             {% if "date" in input_types %}
                 <label for="date-input">Date</label>
                 <input type="date" name="date-input"/>
+                <br>
             {% endif %}
             {% if "number" in input_types %}
                 <label for="number-input">Number</label>
                 <input type="number" name="number-input"/>
+                <br>
             {% endif %}
             {% if "radio" in input_types %}
                 {% for option in options %}
                     <input type="radio" id="{{ option }}" name="radio_input" value="{{ option }}">
                     <label for="{{ option }}">{{ option }}</label>
+                    <br>
                 {% endfor %}
             {% endif %}
             {% if "checkbox" in input_types %}
