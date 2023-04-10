@@ -72,14 +72,14 @@
             {% endif %}
             {% if "radio" in input_types %}
                 {% for option in options %}
-                    <input type="radio" id="{{ option }}" name="radio_input" value="{{ option }}">
+                    <input type="radio" id="{{ option }}" name="radio-input" value="{{ option }}">
                     <label for="{{ option }}">{{ option }}</label>
                     <br>
                 {% endfor %}
             {% endif %}
             {% if "checkbox" in input_types %}
                 {% for option in options %}
-                    <input type="checkbox" id="{{ option }}" name="checkbox_input" value="{{ option }}">
+                    <input type="checkbox" id="{{ option }}" name="checkbox-input" value="{{ option }}">
                     <label for="{{ option }}">{{ option }}</label>
                     <br>
                 {% endfor %}

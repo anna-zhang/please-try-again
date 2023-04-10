@@ -129,7 +129,11 @@ def submit_content():
             # session['uploaded_img_file_path'] = os.path.join(app.config['UPLOAD_FOLDER'], img_filename)
         else:
             input_field = input + "-input"
-            session["submitted_content"][input] = request.form.get(input_field)
+            # for checkboxes
+            if input == "checkbox": 
+                session["submitted_content"][input] = request.form.getlist(input_field)
+            else:
+                session["submitted_content"][input] = request.form.get(input_field)
         print("SUBMITTED CONTENT: " + str(session["submitted_content"])) # FOR DEBUGGING
     
     # Switch roles

@@ -50,9 +50,7 @@
                 <p>{{ submitted_content['number'] }}</p>
             {% endif %}
             {% if "radio" in input_types %}
-                {% for option in options %}
-                    <p>{{ submitted_content['text'] }}</p>
-                {% endfor %}
+                {{ submitted_content['radio'] }}
             {% endif %}
             {% if "checkbox" in input_types %}
                 {% for i in range(options|length) %}
