@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% include "_asterisk_menu.html" %}
     <h1>Are you sure you want to exit the game?</h1>
     <button onclick="window.location.href='/next_round'">Just skip this round</button>
     <button onclick="window.location.href='/index'">Yes, exit game</button>

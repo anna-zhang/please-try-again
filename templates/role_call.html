@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% include "_asterisk_menu.html" %}
     {% include "_round_info.html" %}
     <h2>{{ curr_player_name }}, you're up!</h2>
     <!-- Depending on if the content moderator or provider is called up, the "I'm Ready" button goes to the corresponding page -->
