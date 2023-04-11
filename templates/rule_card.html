@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Rule Card</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
     {% include "_round_info.html" %}
     <p>Find the card labeled <b>Rule #{{ card_number }}</b></p>
     <a href="/review_content">Found It</a>
-</body>
-</html>
+{% endblock content %}

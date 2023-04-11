@@ -23,7 +23,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER # configure the file upload folder
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
-    html = render_template('index.html')
+    html = render_template('index.html', title="Please Try Again")
     response = make_response(html)
     session['player1'] = '' # player 1 name
     session['player2'] = '' # player 2 name
@@ -38,14 +38,14 @@ def index():
 @app.route('/instructions', methods=['GET'])
 def instructions():
     slide_number = 1
-    html = render_template('instructions.html', slide=slide_number)
+    html = render_template('instructions.html', slide=slide_number, title="How to Play")
     response = make_response(html)
     return response
 
 # Set Up Game: get names of players
 @app.route('/setup', methods=['GET'])
 def setup():
-    html = render_template('setup.html')
+    html = render_template('setup.html', title="Set Up")
     response = make_response(html)
     return response
 
@@ -71,7 +71,7 @@ def setup_game():
 # Play Game
 @app.route('/play', methods=['GET'])
 def play():
-    html = render_template('game.html')
+    html = render_template('game.html', title="Game") # TODO: check usage
     response = make_response(html)
     return response
 
@@ -86,9 +86,9 @@ def role_call():
     curr_player_name = session[curr_player_num] # player 1's name or player 2's name
 
     if not curr_player_name:
-        return render_template('error.html')
+        return render_template('error.html', title="Error")
 
-    return render_template('role_call.html', curr_role=curr_role, curr_player_name=curr_player_name, round_num=round_num, attempt_num=attempt_num)
+    return render_template('role_call.html', curr_role=curr_role, curr_player_name=curr_player_name, round_num=round_num, attempt_num=attempt_num, title="Role Call")
 
 # Content submission page
 @app.route('/input_content', methods=['GET'])
@@ -102,7 +102,7 @@ def input_content():
     options = curr_card.options # list of options, applicable only if checkbox or radio input types, None otherwise
     round_num = session['round_number'] # which round the players are on
     attempt_num = session['attempt_number'] # get current attempt number
-    html = render_template('input_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options, attempt_num=attempt_num)
+    html = render_template('input_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options, attempt_num=attempt_num, title="Input Content")
     response = make_response(html)
     return response
 
@@ -148,7 +148,7 @@ def rule_card():
     card_number = curr_card.id # get unique identifier of card
     round_num = session['round_number'] # which round the players are on
     attempt_num = session['attempt_number'] # get current attempt number
-    html = render_template('rule_card.html', card_number=card_number, round_num=round_num, attempt_num=attempt_num)
+    html = render_template('rule_card.html', card_number=card_number, round_num=round_num, attempt_num=attempt_num, title="Rule Card")
     response = make_response(html)
     return response
 
@@ -167,7 +167,7 @@ def review_content():
     
     round_num = session['round_number'] # which round the players are on
     attempt_num = session['attempt_number'] # get current attempt number
-    html = render_template('review_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options, submitted_content=submitted_content, attempt_num=attempt_num)
+    html = render_template('review_content.html', card_number=card_number, round_num=round_num, prompt=prompt, input_types=input_types, options=options, submitted_content=submitted_content, attempt_num=attempt_num, title="Review Content")
     response = make_response(html)
     return response
 
@@ -175,7 +175,7 @@ def review_content():
 def accepted_content():
     round_num = session['round_number'] # which round the players are on
     attempt_num = session['attempt_number'] # get current attempt number
-    html = render_template('accepted_content.html', round_num=round_num, attempt_num=attempt_num)
+    html = render_template('accepted_content.html', round_num=round_num, attempt_num=attempt_num, title="Accepted Content")
     response = make_response(html)
     return response
 
@@ -187,7 +187,7 @@ def rejected_content():
     curr_player_name = session[curr_player_num] # player 1's name or player 2's name
     round_num = session['round_number'] # which round the players are on
     attempt_num = session['attempt_number'] # get current attempt number
-    html = render_template('rejected_content.html', round_num=round_num, curr_player_name=curr_player_name, attempt_num=attempt_num)
+    html = render_template('rejected_content.html', round_num=round_num, curr_player_name=curr_player_name, attempt_num=attempt_num, title="Rejected Content")
     response = make_response(html)
     return response
 
@@ -202,7 +202,7 @@ def try_again():
 # Give option to skip this round or exit game entirely 
 @app.route('/exit_game', methods=['GET'])
 def exit_game():
-    html = render_template('exit_game.html')
+    html = render_template('exit_game.html', title="Exit Game")
     response = make_response(html)
     return response
 

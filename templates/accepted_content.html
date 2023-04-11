@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Accepted Content</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
     {% include "_round_info.html" %}
     <p>The content was accepted!</p>
     <p>Onto the next round?</p>
@@ -13,5 +8,4 @@
     <button onclick="window.location.href='/next_round'">Yes</button>
     <!-- Exit Game -->
     <button onclick="window.location.href='/exit_game'">No</button>
-</body>
-</html>
+{% endblock content %}

@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Role Call</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
     {% include "_round_info.html" %}
     <h2>{{ curr_player_name }}, you're up!</h2>
     <!-- Depending on if the content moderator or provider is called up, the "I'm Ready" button goes to the corresponding page -->
@@ -16,5 +11,4 @@
     {% else %}
         <p>There has been an error. Please <a href="index.html">restart the game</a>.</p>
     {% endif %}
-</body>
-</html>
+{% endblock content %}

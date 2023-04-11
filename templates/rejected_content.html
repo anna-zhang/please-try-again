@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Rejected Content</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
     {% include "_round_info.html" %}
     <p>The content was rejected!</p>
     <p>{{ curr_player_name }}, would you like to try again?</p>
     <button onclick="window.location.href='/try_again'">Yes</button>
     <button onclick="window.location.href='/exit_game'">No</button>
-</body>
-</html>
+{% endblock content %}

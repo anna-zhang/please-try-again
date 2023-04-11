@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Please Try Again</title>
-</head>
-<body>
-    <h1>Please Try Again</h1>
-    <p>a satirical two-player game exploring the (un)written rules of online platforms</p>
-    <a href="/instructions">How to Play</a>
-    <br>
-    <a href="/setup">Play Game</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Please Try Again</h1>
+<p>a satirical two-player game exploring the (un)written rules of online platforms</p>
+<a href="/instructions">How to Play</a>
+<br>
+<a href="/setup">Play Game</a>
+{% endblock content %}
