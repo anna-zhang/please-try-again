@@ -25,7 +25,7 @@ cards = [
   Card(13, "Where do you see yourself in the future?", "It must be an interior space.", ["image"]), 
   Card(14, "Share a website that you love.", "It must be a URL that does not end with “.com”", ["url"]), 
   Card(15, "What is an event that you're looking forward to?", "The date must be six months from now.", ["text", "date"]), 
-  Card(16, "What do you want to try?", "Can only select one of the options.", ["checkbox"], ["TODO: option1", "TODO: option2", "TODO: option3", "TODO: option4", "TODO: option5"]), 
+  Card(16, "What do you want to try?", "Can only select one of the options.", ["checkbox"], ["sky diving", "eating 100 hot dogs", "giving my loved one flowers", "backflipping on cross campus"]), 
   Card(17, "What would you name your next car?", "The name must be 3-4 letters long.", ["text"]),
   Card(18, "Describe something you don't know that you're interested in learning more about.", "Must include the “?” character.", ["textarea"]),
   Card(19, "Come up with a strong password.", "The number of letter characters and numbers have to equal each other.", ["password"]),
