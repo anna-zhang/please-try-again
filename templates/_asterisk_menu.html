@@ -1,5 +1,11 @@
-<nav id="asterisk-nav" aria-expanded="false">
-    <button id="asterisk-button" aria-label="Menu" onmouseover="openMenu()" onmouseout="closeMenu()" onclick="toggleMenu()"><i class="bi bi-asterisk" aria-hidden="true"></i></button>
+<style>
+    ul {
+        list-style-type: none;
+    }
+</style>
+
+<nav id="asterisk-nav" aria-expanded="false" onmouseover="openMenu()" onmouseout="closeMenu()">
+    <button id="asterisk-button" aria-label="Menu" onclick="toggleMenu()"><i class="bi bi-asterisk" aria-hidden="true"></i></button>
     <ul id="menu-sublinks" style="display: none;">
       <li><a href="/setup">Restart Game</a></li>
       <li><a href="/">Exit Game</a></li>
