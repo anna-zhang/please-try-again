@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from flask import Flask, request, make_response, render_template, session, redirect, url_for
-from cards_list import Card, cards
+from cards_list import Card, cards, all_card_indices, remaining_card_indices
 import os
 from werkzeug.utils import secure_filename
 import random
@@ -16,6 +16,22 @@ UPLOAD_FOLDER = os.path.join('static', 'uploads') # static folder is the default
 app = Flask(__name__) # set up Flask server
 app.secret_key = "a secret key for testing" # need to set a secret key in order to use session cookies
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER # configure the file upload folder
+
+#-----------------------------------------------------------------------
+
+# Get a random card, returns the index of that card in cards list
+def get_random_card():
+    global remaining_card_indices
+    random_index = random.randrange(len(remaining_card_indices))
+    random_card = remaining_card_indices[random_index] # get the card index at that random index of the remaining_card_indices list
+    remaining_card_indices.pop(random_index) # remove the card index at that random index of the remaining_card_indices list 
+    
+    # Print the remaining list of card indices
+    print("List after removal of random card : " + str(remaining_card_indices))
+    if len(remaining_card_indices) == 0: # restart
+        remaining_card_indices = all_card_indices
+    return random_card
+    
 
 #-----------------------------------------------------------------------
 
@@ -64,7 +80,8 @@ def setup_game():
     session['turn'] = 'provider' # set which role is starting
     session['round_number'] = 1 # set which round number the pair of players is on
     # session['card_index'] = random.randrange(0, len(cards)) # set the card number for the round; TODO: change this for testing
-    session['card_index'] = 26 # set the card number for the round; TODO: change this for testing
+    # session['card_index'] = 26 # set the card number for the round; TODO: change this for testing
+    session['card_index'] = get_random_card()
     session['attempt_number'] = 1 # set which attempt number the provider is on for this card
     return response
 
@@ -217,7 +234,7 @@ def next_round():
         session['provider'] = 'player2'
     session['turn'] = 'provider' # back to provider starting
     session['round_number'] = session['round_number'] + 1 # increment round number
-    session['card_index'] = random.randrange(0, len(cards))
+    session['card_index'] = get_random_card() # get the index of a random card in the cards array
     session['attempt_number'] = 1 # set which attempt number the provider is on for this card
     response = redirect(url_for('role_call'))
     return response
