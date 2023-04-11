@@ -1,5 +1,5 @@
 <nav id="asterisk-nav" aria-expanded="false">
-    <button id="asterisk-button" aria-label="Menu" onclick="toggleMenu()"><i class="bi bi-asterisk" aria-hidden="true"></i></button>
+    <button id="asterisk-button" aria-label="Menu" onmouseover="openMenu()" onmouseout="closeMenu()" onclick="toggleMenu()"><i class="bi bi-asterisk" aria-hidden="true"></i></button>
     <ul id="menu-sublinks" style="display: none;">
       <li><a href="/setup">Restart Game</a></li>
       <li><a href="/">Exit Game</a></li>
@@ -8,20 +8,34 @@
 
 <script>
     'use strict'
+
+    function openMenu() {
+        console.log("opening menu");
+        var asteriskNav = document.getElementById("asterisk-nav");
+        var sublinks = document.getElementById("menu-sublinks");
+        asteriskNav.setAttribute("aria-expanded", "true");
+        sublinks.style.display = "block";
+    }
+
+    function closeMenu() {
+        console.log("closing menu");
+        var asteriskNav = document.getElementById("asterisk-nav");
+        var sublinks = document.getElementById("menu-sublinks");
+        asteriskNav.setAttribute("aria-expanded", "false");
+        sublinks.style.display = "none";
+    }
+
 	function toggleMenu() {
         console.log("toggling");
         var asteriskNav = document.getElementById("asterisk-nav");
         var sublinks = document.getElementById("menu-sublinks");
-        console.log("aria-expanded: " + asteriskNav.getAttribute("aria-expanded"));
-        console.log("sublinks.style: " + sublinks.style.display);
         if (asteriskNav.getAttribute("aria-expanded") == "false")
         {
-            asteriskNav.setAttribute("aria-expanded", "true");
-            sublinks.style.display = "block";
+            openMenu();
         }
         else {
-            asteriskNav.setAttribute("aria-expanded", "false");
-            sublinks.style.display = "none";
+            closeMenu();
         }
     }
+    
 </script>
