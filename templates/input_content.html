@@ -2,65 +2,76 @@
 
 {% block content %}
     {% include "_round_info.html" %}
-    <h2>Card number: {{ card_number }}</h2>
+    <!-- <h2>Card number: {{ card_number }}</h2> -->
     <p><b>Prompt:</b> {{ prompt }}</p>
     <form action="submit_content" enctype="multipart/form-data" method="post">
         {% if input_types == None or input_types == [] %}
             <p>There has been an error. Please <a href="index.html">restart the game</a>.</p>
         {% else %}
             {% if "text" in input_types %}
-                <label for="text-input">Text</label>
+                <label for="text-input">Input text</label>
+                <br>
                 <input type="text" name="text-input"/>
                 <br>
             {% endif %}
             {% if "image" in input_types %}
-                <label for="image-input">Image</label>
+                <label for="image-input">Upload image</label>
+                <br>
                 <input type="file" name="image-input"/>
+                <br>
                 <br>
             {% endif %}
             {% if "color" in input_types %}
-                <label for="color-input">Color</label>
+                <label for="color-input">Select a color</label>
+                <br>
                 <input type="color" name="color-input"/>
                 <br>
             {% endif %}
             {% if "url" in input_types %}
-                <label for="url-input">URL</label>
+                <label for="url-input">Input a URL</label>
+                <br>
                 <input type="url" name="url-input"/>
                 <br>
             {% endif %}
             {% if "password" in input_types %}
                 <label for="password-input">Password</label>
+                <br>
                 <input type="password" name="password-input"/>
                 <br>
             {% endif %}
             {% if "email" in input_types %}
                 <label for="email-input">Email</label>
+                <br>
                 <input type="email" name="email-input"/>
                 <br>
             {% endif %}
             {% if "telephone" in input_types %}
                 <label for="telephone-input">Telephone</label>
+                <br>
                 <input type="tel" name="telephone-input"/>
                 <br>
             {% endif %}
             {% if "time" in input_types %}
                 <label for="time-input">Time</label>
+                <br>
                 <input type="time" name="time-input"/>
                 <br>
             {% endif %}
             {% if "textarea" in input_types %}
-                <label for="textarea-input">Text area</label>
+                <label for="textarea-input">Input text</label>
                 <br>
                 <textarea name="textarea-input"></textarea>
                 <br>
             {% endif %}
             {% if "date" in input_types %}
                 <label for="date-input">Date</label>
+                <br>
                 <input type="date" name="date-input"/>
                 <br>
             {% endif %}
             {% if "number" in input_types %}
-                <label for="number-input">Number</label>
+                <label for="number-input">Input a number</label>
+                <br>
                 <input type="number" name="number-input"/>
                 <br>
             {% endif %}
@@ -79,8 +90,9 @@
                 {% endfor %}
             {% endif %}
         {% endif %}
+        <br>
         <button type="submit">Submit</button>
     </form>
-
+    <br>
     <button onclick="window.location.href='/next_round'">Skip this round</button>
 {% endblock content %}

@@ -37,7 +37,7 @@ cards = [
   Card(25, "What's your pro wrestling name?", "The name must be in ALL CAPS.", ["text"]),
   Card(26, "Rank these fruits: apple, orange, mango, watermelon, banana", "The order has to be alphabetical by the first letter of the fruit.", ["text"]),
   Card(27, "What types of weather do you enjoy?", "Half of the options must be checked. The other half of the options must remain unchecked.", ["checkbox"], ["rainy", "sunny", "humid", "dry", "misty", "hurricane", "snowy", "cold", "warm", "hot"]),
-  Card(28, "Describe silence.", "The input must be empty (left blank).", ["checkbox"], ["rainy", "sunny", "humid", "dry", "misty", "hurricane", "snowy", "cold", "warm", "hot"]),
+  Card(28, "Describe silence.", "The input must be empty (left blank).", ["textarea"]),
   Card(29, "What's your favorite animal?", "The animal must live underwater.", ["image"]),
   Card(30, "What's the magic number?", "The answer must be 7.", ["number"]),
   Card(31, "How much wood could a woodchuck chuck if a woodchuck could chuck wood?", "The answer must be a prime number.", ["number"]),
