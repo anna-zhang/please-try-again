@@ -1,3 +1,3 @@
-body, button {
+body, button, input, input[type="file"] {
     font-family: 'Space Grotesk', sans-serif;
 }
