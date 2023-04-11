@@ -22,14 +22,18 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER # configure the file upload folder
 # Get a random card, returns the index of that card in cards list
 def get_random_card():
     global remaining_card_indices
-    random_index = random.randrange(len(remaining_card_indices))
-    random_card = remaining_card_indices[random_index] # get the card index at that random index of the remaining_card_indices list
-    remaining_card_indices.pop(random_index) # remove the card index at that random index of the remaining_card_indices list 
-    
-    # Print the remaining list of card indices
-    print("List after removal of random card : " + str(remaining_card_indices))
+    global all_card_indices
+
     if len(remaining_card_indices) == 0: # restart
-        remaining_card_indices = all_card_indices
+        random_card = -1 # no more cards left
+        remaining_card_indices = all_card_indices.copy() # reset card options to all possible cards
+    else:
+        random_index = random.randrange(len(remaining_card_indices))
+        random_card = remaining_card_indices[random_index] # get the card index at that random index of the remaining_card_indices list
+        remaining_card_indices.pop(random_index) # remove the card index at that random index of the remaining_card_indices list 
+        
+        # Print the remaining list of card indices
+        print("List after removal of random card : " + str(remaining_card_indices))
     return random_card
     
 
@@ -39,6 +43,9 @@ def get_random_card():
 @app.route('/', methods=['GET'])
 @app.route('/index', methods=['GET'])
 def index():
+    global remaining_card_indices
+    global all_card_indices
+    print("ALL CARD INDICES: " + str(all_card_indices))
     html = render_template('index.html', title="Please Try Again")
     response = make_response(html)
     session['player1'] = '' # player 1 name
@@ -68,6 +75,8 @@ def setup():
 # Set Up Game: save names of players in session cookies and redirect to start game
 @app.route('/setup_game', methods=['POST'])
 def setup_game():
+    global remaining_card_indices
+    global all_card_indices
     player1_name = request.form.get('moderator')
     player2_name = request.form.get('content-provider')
     response = redirect(url_for('role_call'))
@@ -79,10 +88,14 @@ def setup_game():
     session['provider'] = 'player2'
     session['turn'] = 'provider' # set which role is starting
     session['round_number'] = 1 # set which round number the pair of players is on
-    # session['card_index'] = random.randrange(0, len(cards)) # set the card number for the round; TODO: change this for testing
     # session['card_index'] = 26 # set the card number for the round; TODO: change this for testing
+    remaining_card_indices = all_card_indices.copy() # restart with all possible card options
+    print("Reset cards")
+    print("remaining_card_indices: " + str(remaining_card_indices))
+    print("all_card_indices: " + str(all_card_indices))
     session['card_index'] = get_random_card()
     session['attempt_number'] = 1 # set which attempt number the provider is on for this card
+    
     return response
 
 # Play Game
@@ -224,6 +237,13 @@ def exit_game():
     return response
 
 # Give option to skip this round or exit game entirely 
+@app.route('/game_over', methods=['GET'])
+def game_over():
+    html = render_template('game_over.html', title="Game Over")
+    response = make_response(html)
+    return response
+
+# Give option to skip this round or exit game entirely 
 @app.route('/next_round', methods=['GET'])
 def next_round():
     # Change roles
@@ -234,9 +254,13 @@ def next_round():
         session['provider'] = 'player2'
     session['turn'] = 'provider' # back to provider starting
     session['round_number'] = session['round_number'] + 1 # increment round number
-    session['card_index'] = get_random_card() # get the index of a random card in the cards array
-    session['attempt_number'] = 1 # set which attempt number the provider is on for this card
-    response = redirect(url_for('role_call'))
+    selected_card = get_random_card() # get the index of a random card in the cards array
+    if selected_card != -1: # game is not over yet
+        session['card_index'] = selected_card  # set the new card, if there is still one that exists
+        session['attempt_number'] = 1 # set which attempt number the provider is on for this card
+        response = redirect(url_for('role_call'))
+    else:
+        response = redirect(url_for('game_over'))
     return response
     
     

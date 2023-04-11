@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% include "_asterisk_menu.html" %}
+    <h1>Congratulations, you've finished the game!</h1>
+    <button onclick="window.location.href='/setup'">Play again</button>
+    <button onclick="window.location.href='/index'">Exit game</button>
+{% endblock content %}
