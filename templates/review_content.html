@@ -17,7 +17,7 @@
                 <img src="{{ submitted_content['image'] }}" width="500px" />
             {% endif %}
             {% if "color" in input_types %}
-                <div style="width: 500px; height: 300px;">{{ submitted_content['color'] }}</div>
+                <div id="submitted-color" style="width: 500px; height: 300px;" color="{{ submitted_content['color'] }}" aria-label="{{ submitted_content['color'] }}"></div>
             {% endif %}
             {% if "url" in input_types %}
                 <a href="{{ submitted_content['url'] }}">{{ submitted_content['url']}}</a>
@@ -56,4 +56,13 @@
     <br>
     <button onclick="window.location.href='/accept_content'">Accept</button>
     <button onclick="window.location.href='/reject_content'">Reject</button>
+    <script>
+        window.onload = function () {
+            var submittedColor = document.getElementById("submitted-color")
+            if (submittedColor != null) {
+                submittedColor.style.backgroundColor = submittedColor.getAttribute("color"); // change background color of div to be the submitted color
+            }
+            return;
+        }
+    </script>
 {% endblock content %}
