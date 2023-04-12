@@ -1,3 +1,16 @@
 body, button, input, input[type="file"] {
     font-family: 'Space Grotesk', sans-serif;
+    text-align: center;
+
+}
+
+body {
+    background-image: url('../assets/web-bg-1.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
 }
