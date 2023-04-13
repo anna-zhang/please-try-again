@@ -2,19 +2,24 @@
 
 {% block content %}
     {% include "_asterisk_menu.html" %}
-    <h1>Set Up</h1>
-    <p>First, let's assign who will be content provider and moderator for the first round. (Don't worry, you will switch roles at the end of each round.)</p>
-    <form action="setup_game" method="post" autocomplete="off">
-        <label for="moderator"><b>Moderator</b></label>
-        <br>
-        <input type="text" name="moderator" required />
-        <br>
-        <br>
-        <label for="content-provider"><b>Content Provider</b></label>
-        <br>
-        <input type="text" name="content-provider" required />
-        <br>
-        <br>
-        <button type="submit">Let's Play!</button>
-    </form>
+    <div class="flex-container">
+        <div class="title">Set <br> Up</div>
+        <div class="instructions">
+            <p>First, let's assign who will be content provider and moderator for the first round. (Don't worry, you will switch roles at the end of each round.)</p>
+            <form action="setup_game" method="post" autocomplete="off">
+                <label for="moderator"><span style="color:brown"><b>Moderator</b></span></label>
+                <br>
+                <input type="text" name="moderator" required />
+                <br>
+                <br>
+                <label for="content-provider" style="color:rgb(54, 122, 54)"><b>Content Provider</b></label>
+                <br>
+                <input type="text" name="content-provider" required />
+                <br>
+                <br>
+                <button type="submit">Let's Play!</button>
+            </form> </div>
+        
+    </div>
+    
 {% endblock content %}
