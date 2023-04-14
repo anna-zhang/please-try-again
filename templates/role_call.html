@@ -3,7 +3,7 @@
 {% block content %}
     {% include "_asterisk_menu.html" %}
     {% include "_round_info.html" %}
-    <h2>{{ curr_player_name }}, you're up!</h2>
+    <div class="instructions-2"><h5>{{ curr_player_name }}, you're up!</h5></div>
     <!-- Depending on if the content moderator or provider is called up, the "I'm Ready" button goes to the corresponding page -->
     {% if curr_role == 'provider' %}
         <a href="/input_content">I'm Ready!</a>

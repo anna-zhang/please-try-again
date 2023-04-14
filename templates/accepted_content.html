@@ -3,10 +3,18 @@
 {% block content %}
     {% include "_asterisk_menu.html" %}
     {% include "_round_info.html" %}
-    <p>The content was accepted!</p>
-    <p>Onto the next round?</p>
+    
+        <p>The content was accepted!</p>
+        <p>Onto the next round?</p>
+        
+    
+    
     <!-- Time to switch roles! -->
     <button onclick="window.location.href='/next_round'">Yes</button>
     <!-- Exit Game -->
     <button onclick="window.location.href='/exit_game'">No</button>
+    <div class="flower">
+        <img style="width:auto" src="../static/assets/flower-green.svg">
+    </div>
+    
 {% endblock content %}

@@ -3,8 +3,18 @@
 {% block content %}
     {% include "_asterisk_menu.html" %}
     {% include "_round_info.html" %}
-    <p>The content was rejected!</p>
-    <p>{{ curr_player_name }}, would you like to try again?</p>
-    <button onclick="window.location.href='/try_again'">Yes</button>
-    <button onclick="window.location.href='/exit_game'">No</button>
+    <!-- <div class="reject-bg"> -->
+        <p>The content was rejected!</p>
+        <p>{{ curr_player_name }}, would you like to try again?</p>
+        <button style="font-size:40px" window.location.href='/try_again'>Yes</button>
+        <button style="font-size:40px" onclick="window.location.href='/exit_game'">No</button>
+        <div class="flower">
+            <img style="width:auto" src="../static/assets/rejection-mark.svg">
+        </div>
+        
+    <!-- </div> -->
+        
+
+    
+    
 {% endblock content %}
