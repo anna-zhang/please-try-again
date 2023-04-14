@@ -3,7 +3,7 @@
 {% block content %}
     {% include "_asterisk_menu.html" %}
     {% include "_round_info.html" %}
-    
+    <body style="background-color: rgb(126, 218, 146);"></body>
         <p>The content was accepted!</p>
         <p>Onto the next round?</p>
         
@@ -14,7 +14,9 @@
     <!-- Exit Game -->
     <button onclick="window.location.href='/exit_game'">No</button>
     <div class="flower">
-        <img style="width:auto" src="../static/assets/flower-green.svg">
+        <img style="width:auto;position:absolute;right:0" src="../static/assets/flower-green.svg">
     </div>
+
+    <embed src="../static/assets/yay.wav" loop="true" autostart="true" width="2" height="0">
     
 {% endblock content %}

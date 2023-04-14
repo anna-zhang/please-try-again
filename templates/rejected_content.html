@@ -4,14 +4,27 @@
     {% include "_asterisk_menu.html" %}
     {% include "_round_info.html" %}
     <!-- <div class="reject-bg"> -->
-        <p>The content was rejected!</p>
-        <p>{{ curr_player_name }}, would you like to try again?</p>
-        <button style="font-size:40px" window.location.href='/try_again'>Yes</button>
-        <button style="font-size:40px" onclick="window.location.href='/exit_game'">No</button>
+        <body style="background-color: brown;">
+            <div style="color:white;font-size: 40px;">
+                <p>The content was rejected!</p>
+                <p>{{ curr_player_name }}, would you like to try again?</p>
+                <button style="font-size:40px" window.location.href='/try_again'>Yes</button>
+                <button style="font-size:40px" onclick="window.location.href='/exit_game'">No</button>
+            </div>
+           
         <div class="flower">
-            <img style="width:auto" src="../static/assets/rejection-mark.svg">
+            <img style="width:auto;position:absolute;top:10px;left:10px" src="../static/assets/rejection-mark.svg">
         </div>
-        
+        <div class="flower">
+            <img style="width:auto;position:absolute;top:10px;right:10px" src="../static/assets/rejection-mark.svg">
+        </div>
+        <div class="flower">
+            <img style="width:auto;position:absolute;bottom:10px;right:10px" src="../static/assets/rejection-mark.svg">
+        </div>
+        <div class="flower">
+            <img style="width:auto;position:absolute;bottom:10px;left:10px" src="../static/assets/rejection-mark.svg">
+        </div>
+        </body>
     <!-- </div> -->
         
 

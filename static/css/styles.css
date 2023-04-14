@@ -5,7 +5,8 @@ body, button, input, input[type="file"] {
 }
 
 body {
-    background-image: url('../assets/web-bg-1.png');
+    /* background-image: url('../assets/web-bg-1.png'); */
+    background-color:azure;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -147,14 +148,25 @@ button {
 
 .flower {
     animation: mymove 5s infinite;
+    z-index: -100;
 }
+
+.flower-cover {
+    animation: mymove 5s infinite;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    z-index: -100;
+}
+
+.cover-text {
+    position: relative;
+    mix-blend-mode: difference;
+}
+
 
 @keyframes mymove {
     50% {transform: rotate(180deg);}
-}
-
-.reject-bg {
-    background-color: #F52E2E;
 }
 
 .buttn-container {
