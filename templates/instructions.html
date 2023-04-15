@@ -3,7 +3,7 @@
 {% block content %}
     {% include "_asterisk_menu.html" %}
     <div class="flex-container">
-        <div class="title">How<br> to <br>Play<br>(x/3)</div>
+        <div class="title">How<br> to <br>Play<br></div>
         <div class="instructions"> 
             <div id="how-to-play">
                 <p>“Please try again” is a two-player game. One player serves as the CONTENT PROVIDER. The other player takes on the role of the CONTENT MODERATOR.</p>
@@ -17,10 +17,10 @@
 
     <div class="footer">
         {% if slide == 1 %}
-        <button id="previous-slide-button" class="slide-control-button" onclick="prevSlide()" style="display: none;" value="-1">Previous</button>
-        <!-- Add next slide button -->
-        <button id="next-slide-button" class="slide-control-button" onclick="nextSlide()" value="1">Next</button>
-    {% endif %}
+            <button id="previous-slide-button" class="slide-control-button" onclick="prevSlide()" style="display: none;" value="-1">Previous</button>
+            <!-- Add next slide button -->
+            <button id="next-slide-button" class="slide-control-button" onclick="nextSlide()" value="1">Next</button>
+        {% endif %}
     </div>
     
     

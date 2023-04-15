@@ -214,3 +214,16 @@ nav {
     margin-top: 50px;
     text-align: center;
 }
+
+
+#previous-slide-button {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+}
+
+#next-slide-button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}

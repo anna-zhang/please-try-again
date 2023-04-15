@@ -1,7 +1,7 @@
 'use strict'
 
 const instructions = [
-  '<p>“Please try again” is a two-player game. One player serves as the CONTENT PROVIDER. The other player takes on the role of the CONTENT MODERATOR.</p>\n<p>The CONTENT PROVIDER’s job is to submit content based on a shown prompt.</p>\n<p>The CONTENT MODERATOR determines whether the submitted content is accepted or rejected based on the rule shown on a rule card.</p>',
+  '<p>“Please try again” is a two-player game. One player serves as the CONTENT PROVIDER. The other player takes on the role of the CONTENT MODERATOR.</p>\n<div class="card-container">\n<div class="card">The CONTENT PROVIDER’s job is to submit content based on a shown prompt.</div>\n<div class="card" style="background: #FBFF34;">The CONTENT MODERATOR determines whether the submitted content is accepted or rejected based on the rule shown on a rule card.</div>\n</div>',
   '<p>The content provider will not be told this rule. Every time a piece of content is rejected, the content moderator may provide a hint about the rule, without giving the rule away. The content provider can try as many times as they want to get a piece of content accepted. The aim is to get a piece of content accepted in as few attempts as possible.</p>\
   \n<p>What did you eat for lunch?</p>\n\
   <p>How much money is in the jackpot at the end of the rainbow?</p>\n\
