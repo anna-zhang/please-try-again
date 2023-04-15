@@ -2,10 +2,15 @@
 
 {% block content %}
     {% include "_asterisk_menu.html" %}
-    {% include "_round_info.html" %}
-    <body style="background-color: rgb(126, 218, 146);"></body>
+    <div style="color:rgb(245, 237, 237)">
+        {% include "_round_info.html" %}
+    </div>
+    <body style="background-color: rgb(96, 209, 170);"></body>
+    <div style="color:white;font-size: 40px;">
         <p>The content was accepted!</p>
         <p>Onto the next round?</p>
+    </div>
+        
         
     
     
@@ -14,9 +19,19 @@
     <!-- Exit Game -->
     <button onclick="window.location.href='/exit_game'">No</button>
     <div class="flower">
-        <img style="width:auto;position:absolute;right:0" src="../static/assets/flower-green.svg">
+        <img style="width:auto;position:absolute;top:10px;left:10px" src="../static/assets/flower-glow.svg">
     </div>
+    <div class="flower">
+        <img style="width:auto;position:absolute;top:90px;right:10px" src="../static/assets/flower-glow.svg">
+    </div>
+    <div class="flower">
+        <img style="width:auto;position:absolute;bottom:10px;right:60px" src="../static/assets/flower-glow.svg">
+    </div>
+    <div class="flower">
+        <img style="width:auto;position:absolute;bottom:40px;left:10px" src="../static/assets/flower-glow.svg">
+    </div>          
 
-    <embed src="../static/assets/yay.wav" loop="true" autostart="true" width="2" height="0">
-    
+    <audio controls autoplay>
+        <source src="../static/assets/yay.wav" />
+      </audio>
 {% endblock content %}

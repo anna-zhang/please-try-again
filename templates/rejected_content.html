@@ -2,14 +2,16 @@
 
 {% block content %}
     {% include "_asterisk_menu.html" %}
-    {% include "_round_info.html" %}
+    <div style="color:rgb(210, 210, 210);">
+        {% include "_round_info.html" %}
+    </div>
+    
     <!-- <div class="reject-bg"> -->
         <body style="background-color: brown;">
             <div style="color:white;font-size: 40px;">
                 <p>The content was rejected!</p>
                 <p>{{ curr_player_name }}, would you like to try again?</p>
-                <button style="font-size:40px" window.location.href='/try_again'>Yes</button>
-                <button style="font-size:40px" onclick="window.location.href='/exit_game'">No</button>
+               
             </div>
            
         <div class="flower">
@@ -26,7 +28,12 @@
         </div>
         </body>
     <!-- </div> -->
-        
+    <button style="font-size:40px" onclick="window.location.href='/try_again'">Yes</button>
+    <button style="font-size:40px" onclick="window.location.href='/exit_game'">No</button>
+        <br><br>
+    <audio controls autoplay>
+        <source src="../static/assets/boo.wav" />
+      </audio>
 
     
     
